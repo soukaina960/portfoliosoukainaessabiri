@@ -8,6 +8,7 @@
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -214,7 +215,6 @@
         .hero::before {
             content: '';
             position: absolute;
-           
             right: -200px;
             width: 600px;
             height: 600px;
@@ -227,7 +227,6 @@
         .hero::after {
             content: '';
             position: absolute;
-           
             left: -100px;
             width: 400px;
             height: 400px;
@@ -303,10 +302,20 @@
             object-fit: cover;
             border: 10px solid var(--card-bg);
             position: relative;
-          
         }
         
-       
+        .image-placeholder {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(45deg, #2c2c2c, #3d3d3d);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #aaa;
+            font-size: 16px;
+            border: 10px solid var(--card-bg);
+        }
         
         /* About Section */
         .about-content {
@@ -327,8 +336,6 @@
             position: relative;
             z-index: 2;
         }
-        
-       
         
         .about-text {
             flex: 1;
@@ -592,6 +599,23 @@
             font-weight: 500;
         }
         
+        .project-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            box-shadow: none;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--gradient);
+            color: white;
+        }
+        
         /* Contact Section */
         .contact-container {
             display: grid;
@@ -750,6 +774,110 @@
             opacity: 0.7;
         }
         
+        /* Loading Spinner */
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+        /* Conteneur des projets */
+.projects-container {
+  display: flex;
+  justify-content: center;   /* centre horizontalement */
+  gap: 40px;                 /* espace entre les cartes */
+  flex-wrap: wrap;           /* permet le retour à la ligne si écran petit */
+  margin-top: 50px;
+}
+
+/* Chaque carte projet */
+.project-item {
+  width: 500px;              /* 👉 largeur grande */
+ 
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Effet hover */
+.project-item:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.25);
+}
+
+/* Image du projet */
+.project-image img {
+  width: 100%;
+  height: 280px;       /* fixe la hauteur */
+  object-fit: cover;   /* évite la déformation */
+  border-bottom: 1px solid #eee;
+}
+
+/* Infos */
+.project-info {
+  padding: 20px;
+}
+
+.project-info h3 {
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+
+}
+
+.project-info p {
+  font-size: 1rem;
+
+  margin-bottom: 16px;
+}
+
+/* Tags */
+.project-tags {
+  margin-bottom: 20px;
+  margin-left: 90px;
+}
+
+.project-tags span {
+  display: inline-block;
+ 
+
+  font-size: 0.9rem;
+  padding: 5px 12px;
+  border-radius: 20px;
+  margin: 5px 8px 0 3px;
+}
+
+/* Boutons */
+.project-buttons {
+  display: flex;
+  gap: 12px;
+
+
+}
+
+.project-buttons .btn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  margin-left: 40px;
+
+}
+
+
+
+
+
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
         /* Animations */
         @keyframes float {
             0% { transform: translateY(0px); }
@@ -800,7 +928,9 @@
             100% { transform: translate(0, 0) rotate(0deg); }
         }
         
-      
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
         
         .pulse {
             animation: pulse 4s ease-in-out infinite;
@@ -816,9 +946,7 @@
             transform: translateY(50px);
             transition: opacity 0.8s ease, transform 0.8s ease;
         }
-        .hero-buttons{
-            margin-left: 20px;
-        }
+        
         .scroll-animate.animate {
             opacity: 1;
             transform: translateY(0);
@@ -950,6 +1078,10 @@
             .veil-element {
                 display: none;
             }
+            
+            .project-buttons {
+                flex-direction: column;
+            }
         }
         
         @media (max-width: 768px) {
@@ -1000,6 +1132,35 @@
             
             .projects-container {
                 grid-template-columns: 1fr;
+            }
+            
+            .hero-image img, .image-placeholder {
+                max-height: 400px;
+                height: 400px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-text h1 {
+                font-size: 32px;
+            }
+            
+            .section-title h2 {
+                font-size: 30px;
+            }
+            
+            .hero-image img, .image-placeholder {
+                max-height: 300px;
+                height: 300px;
+            }
+            
+            .info-list li {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .info-list li strong {
+                margin-bottom: 5px;
             }
         }
     </style>
@@ -1058,6 +1219,8 @@
 
         // Composant Hero
         function Hero() {
+            const [imageLoaded, setImageLoaded] = useState(false);
+            
             return (
                 <section id="accueil" className="hero">
                     <div className="veil-element veil-1"></div>
@@ -1072,7 +1235,22 @@
                             </div>
                         </div>
                         <div className="hero-image">
-                            <img src="WhatsApp Image 2025-05-22 à 23.48.59_e7ad31b7.jpg" alt="Soukaina ESSABIRI" className="floating" />
+                            {!imageLoaded && (
+                                <div className="image-placeholder">
+                                    <i className="fas fa-user fa-3x" style={{marginRight: '10px'}}></i>
+                                    Chargement de l'image...
+                                </div>
+                            )}
+                            <img 
+                                src="WhatsApp Image 2025-05-22 à 23.48.59_e7ad31b7.jpg" 
+                                alt="Soukaina ESSABIRI" 
+                                className="floating" 
+                                style={{display: imageLoaded ? 'block' : 'none'}}
+                                onLoad={() => setImageLoaded(true)}
+                                onError={(e) => {
+                                    e.target.style.display = 'none';
+                                }}
+                            />
                         </div>
                     </div>
                 </section>
@@ -1083,6 +1261,7 @@
         function About() {
             const aboutRef = useRef(null);
             const [animated, setAnimated] = useState(false);
+            const [imageLoaded, setImageLoaded] = useState(false);
             
             useEffect(() => {
                 const observer = new IntersectionObserver(
@@ -1115,7 +1294,21 @@
                         </div>
                         <div className="about-content">
                             <div className={`about-image ${animated ? 'scroll-animate-left animate' : 'scroll-animate-left'}`}>
-                                <img src="it-expert-pointing-pc-monitor-using-machine-learning-optimize-server-farm.jpg" alt="Soukaina ESSABIRI" />
+                                {!imageLoaded && (
+                                    <div className="image-placeholder" style={{height: '400px'}}>
+                                        <i className="fas fa-image fa-3x" style={{marginRight: '10px'}}></i>
+                                        Chargement de l'image...
+                                    </div>
+                                )}
+                                <img 
+                                    src="it-expert-pointing-pc-monitor-using-machine-learning-optimize-server-farm.jpg" 
+                                    alt="Soukaina ESSABIRI" 
+                                    style={{display: imageLoaded ? 'block' : 'none'}}
+                                    onLoad={() => setImageLoaded(true)}
+                                    onError={(e) => {
+                                        e.target.style.display = 'none';
+                                    }}
+                                />
                             </div>
                             <div className={`about-text ${animated ? 'scroll-animate-right animate' : 'scroll-animate-right'}`}>
                                 <h3>Développeuse Full Stack Passionnée</h3>
@@ -1124,7 +1317,7 @@
                                 <ul className="info-list">
                                     <li><strong>Nom :</strong> <span>SOUKAINA ESSABIRI</span></li>
                                     <li><strong>Email :</strong> <span>soukainaessabiri01@gmail.com</span></li>
-                                    <li><strong>Téléphone :</strong> <span>   0649695500</span></li>
+                                    <li><strong>Téléphone :</strong> <span>0649695500</span></li>
                                     <li><strong>Localisation :</strong> <span>Salé, Maroc</span></li>
                                 </ul>
                                 <a href="SOUKAINA ESSABIRI (3).pdf" className="btn">Télécharger mon CV</a>
@@ -1137,7 +1330,6 @@
 
         // Composant Skills
         function Skills() {
-            
             const skillsRef = useRef(null);
             const [animated, setAnimated] = useState(false);
             
@@ -1186,11 +1378,7 @@
                                 <h3>Bases de données</h3>
                                 <p>Systèmes SQL : MySQL. Systèmes NoSQL : MongoDB. Requêtes et optimisation de bases de données.</p>
                             </div>
-                            <div className={`skill-item ${animated ? 'scroll-animate-scale animate' : 'scroll-animate-scale'}`}>
-                                <i className="fas fa-mobile-alt"></i>
-                                <h3>Développement Mobile</h3>
-                                <p>Développement d'applications avec React Native. Création d'interfaces utilisateur réactives et performantes.</p>
-                            </div>
+                         
                             <div className={`skill-item ${animated ? 'scroll-animate-scale animate' : 'scroll-animate-scale'}`}>
                                 <i className="fas fa-tasks"></i>
                                 <h3>Gestion de Projets</h3>
@@ -1284,20 +1472,29 @@
                     title: "Site Éducatif",
                     description: "Développement d'un site éducatif avec présentation des cours, niveaux scolaires et espace contact.",
                     tags: ["React.js", "Laravel", "MySQL"],
-                    image: "multiethnic-team-young-partners-having-meeting-cafeteria-discussing-plans-sharing-ideas-analyzing-financial-data-project-using-laptop.jpg"
+                    image: "multiethnic-team-young-partners-having-meeting-cafeteria-discussing-plans-sharing-ideas-analyzing-financial-data-project-using-laptop.jpg",
+                    links: {
+                        demo: "https://centrecam.vercel.app",
+                        github: "https://github.com/soukaina960/centrecam"
+                    }
                 },
                 {
-                    id: 4,
+                    id: 2,
                     title: "Plateforme Éducative",
                     description: "Site d'échange de cours entre élèves et enseignants (upload, téléchargement, messagerie).",
-                    tags: ["Vue.js", "Laravel", "MySQL"],
-                    image: "learn-learning-education-studying-concept.jpg"
-                },
+                    tags: ["React.js", "Laravel", "MySQL"],
+                    image: "learn-learning-education-studying-concept.jpg",
+                    links: {
+                        demo: "https://gestion-ecole-git-main-soukaina960s-projects.vercel.app/",
+                        github: "https://github.com/soukaina960/gestion-ecole"
+                    }
+                }
             ]);
-            
+
             const projectsRef = useRef(null);
             const [animated, setAnimated] = useState(false);
-            
+            const [imagesLoaded, setImagesLoaded] = useState({});
+
             useEffect(() => {
                 const observer = new IntersectionObserver(
                     ([entry]) => {
@@ -1307,18 +1504,26 @@
                     },
                     { threshold: 0.3 }
                 );
-                
+
                 if (projectsRef.current) {
                     observer.observe(projectsRef.current);
                 }
-                
+
                 return () => {
                     if (projectsRef.current) {
                         observer.unobserve(projectsRef.current);
                     }
                 };
             }, [animated]);
-            
+
+            const handleImageLoad = (id) => {
+                setImagesLoaded(prev => ({...prev, [id]: true}));
+            };
+
+            const handleImageError = (id) => {
+                setImagesLoaded(prev => ({...prev, [id]: false}));
+            };
+
             return (
                 <section id="projets" className="section" ref={projectsRef}>
                     <div className="veil-element veil-1" style={{width: '250px', height: '250px', top: '20%', left: '10%'}}></div>
@@ -1329,9 +1534,21 @@
                         </div>
                         <div className="projects-container">
                             {projects.map((project, index) => (
-                                <div key={project.id} className={`project-item ${animated ? 'scroll-animate-scale animate' : 'scroll-animate-scale'}`} style={{transitionDelay: `${index * 0.1}s`}}>
+                                <div key={project.id} className={`project-item ${animated ? 'scroll-animate-scale animate' : 'scroll-animate-scale'}`} style={{transitionDelay: `${index * 0.15}s`}}>
                                     <div className="project-image">
-                                        <img src={project.image} alt={project.title} />
+                                        {!imagesLoaded[project.id] && (
+                                            <div className="image-placeholder" style={{height: '220px'}}>
+                                                <i className="fas fa-image fa-2x" style={{marginRight: '10px'}}></i>
+                                                Chargement...
+                                            </div>
+                                        )}
+                                        <img 
+                                            src={project.image} 
+                                            alt={project.title}
+                                            style={{display: imagesLoaded[project.id] ? 'block' : 'none'}}
+                                            onLoad={() => handleImageLoad(project.id)}
+                                            onError={() => handleImageError(project.id)}
+                                        />
                                     </div>
                                     <div className="project-info">
                                         <h3>{project.title}</h3>
@@ -1341,7 +1558,14 @@
                                                 <span key={tagIndex}>{tag}</span>
                                             ))}
                                         </div>
-                                        <a href="https://centreelmoumen-ny3j.vercel.app" className="btn">Voir le projet</a>
+                                        <div className="project-buttons">
+                                            <a href={project.links.demo} target="_blank" rel="noopener noreferrer" className="btn">
+                                                Voir le projet
+                                            </a>
+                                            <a href={project.links.github} target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
+                                                Code source
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             ))}
@@ -1358,6 +1582,7 @@
                 email: '',
                 message: ''
             });
+            const [isSubmitting, setIsSubmitting] = useState(false);
             
             const contactRef = useRef(null);
             const [animated, setAnimated] = useState(false);
@@ -1392,12 +1617,18 @@
             
             const handleSubmit = (e) => {
                 e.preventDefault();
-                alert('Message envoyé! Merci de m\'avoir contactée.');
-                setFormData({
-                    name: '',
-                    email: '',
-                    message: ''
-                });
+                setIsSubmitting(true);
+                
+                // Simulation d'envoi
+                setTimeout(() => {
+                    alert('Message envoyé! Merci de m\'avoir contactée.');
+                    setFormData({
+                        name: '',
+                        email: '',
+                        message: ''
+                    });
+                    setIsSubmitting(false);
+                }, 1500);
             };
             
             return (
@@ -1447,6 +1678,7 @@
                                     value={formData.name}
                                     onChange={handleChange}
                                     required 
+                                    disabled={isSubmitting}
                                 />
                                 <input 
                                     type="email" 
@@ -1455,6 +1687,7 @@
                                     value={formData.email}
                                     onChange={handleChange}
                                     required 
+                                    disabled={isSubmitting}
                                 />
                                 <textarea 
                                     name="message" 
@@ -1462,8 +1695,16 @@
                                     value={formData.message}
                                     onChange={handleChange}
                                     required
+                                    disabled={isSubmitting}
                                 ></textarea>
-                                <button type="submit" className="btn">Envoyer le message</button>
+                                <button type="submit" className="btn" disabled={isSubmitting}>
+                                    {isSubmitting ? (
+                                        <>
+                                            <span className="loading-spinner"></span>
+                                            Envoi en cours...
+                                        </>
+                                    ) : 'Envoyer le message'}
+                                </button>
                             </form>
                         </div>
                     </div>
@@ -1481,7 +1722,7 @@
                                 <h3>Soukaina ESSABIRI</h3>
                                 <p>Développeuse Full Stack passionnée, créant des solutions web modernes et innovantes.</p>
                                 <div className="social-links">
-                                    <a href="#"><i className="fab fa-github"></i></a>
+                                    <a href="https://github.com/soukaina960" target="_blank" rel="noopener noreferrer"><i className="fab fa-github"></i></a>
                                     <a href="#"><i className="fab fa-linkedin"></i></a>
                                     <a href="#"><i className="fab fa-twitter"></i></a>
                                 </div>

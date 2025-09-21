@@ -1,0 +1,21 @@
+.projects-container {
+  display: flex;
+  justify-content: center; /* centre horizontalement */
+  gap: 30px; /* espace entre les cartes */
+  flex-wrap: wrap; /* permet le retour à la ligne si écran petit */
+  margin-top: 50px;
+}
+
+.project-item {
+  width: 300px; /* largeur fixe pour chaque carte */
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
