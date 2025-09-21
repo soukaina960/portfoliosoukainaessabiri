@@ -1,43 +1,1550 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soukaina ESSABIRI - Développeuse Full Stack</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6C63FF;
+            --secondary-color: #FF6584;
+            --accent-color: #36D1DC;
+            --dark-color: #121212;
+            --light-color: #1E1E1E;
+            --text-color: #E0E0E0;
+            --card-bg: #252525;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --gradient: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --card-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            --veil-color-1: rgba(108, 99, 255, 0.15);
+            --veil-color-2: rgba(255, 101, 132, 0.15);
+            --veil-color-3: rgba(54, 209, 220, 0.15);
+            --veil-color-4: rgba(45, 43, 85, 0.15);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--dark-color);
+            overflow-x: hidden;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+            transition: var(--transition);
+            z-index: -1;
+        }
+        
+        .btn:hover::before {
+            width: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(108, 99, 255, 0.25);
+        }
+        
+        .section {
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            margin-bottom: 15px;
+            color: white;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+        
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(18, 18, 18, 0.95);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            padding: 15px 0;
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+        
+        header.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .nav-menu {
+            display: flex;
+        }
+        
+        .nav-menu li {
+            margin: 0 15px;
+        }
+        
+        .nav-menu a {
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: var(--transition);
+        }
+        
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--primary-color);
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding-top: 100px;
+            padding-bottom: 120px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+           
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: var(--veil-color-1);
+            z-index: -1;
+            animation: pulse 8s ease-in-out infinite;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+           
+            left: -100px;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: var(--veil-color-2);
+            z-index: -1;
+            animation: pulse 6s ease-in-out infinite alternate;
+        }
+        
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .hero-text {
+            flex: 1;
+            padding-right: 30px;
+        }
+        
+        .hero-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 56px;
+            margin-bottom: 20px;
+            color: white;
+            line-height: 1.2;
+        }
+        
+        .hero-text h1 span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-text p {
+            font-size: 18px;
+            margin-bottom: 40px;
+            color: #ccc;
+            max-width: 90%;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            box-shadow: none;
+        }
+        
+        .btn-outline::before {
+            background: var(--gradient);
+        }
+        
+        .btn-outline:hover {
+            color: white;
+        }
+        
+        .hero-image {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero-image img {
+            max-width: 100%;
+            max-height: 500px;
+            border-radius: 30px;
+            box-shadow: var(--card-shadow);
+            object-fit: cover;
+            border: 10px solid var(--card-bg);
+            position: relative;
+          
+        }
+        
+       
+        
+        /* About Section */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+        
+        .about-image {
+            flex: 1;
+            position: relative;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            position: relative;
+            z-index: 2;
+        }
+        
+       
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 16px;
+            line-height: 1.8;
+            color: #ccc;
+        }
+        
+        .info-list {
+            margin-top: 30px;
+        }
+        
+        .info-list li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .info-list li strong {
+            min-width: 100px;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .info-list li span {
+            color: #ccc;
+        }
+        
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .skill-item {
+            background: var(--card-bg);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .skill-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--gradient);
+            transition: var(--transition);
+            z-index: -1;
+        }
+        
+        .skill-item:hover::before {
+            width: 100%;
+            opacity: 0.1;
+        }
+        
+        .skill-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .skill-item i {
+            font-size: 48px;
+            margin-bottom: 25px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .skill-item h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: white;
+        }
+        
+        .skill-item p {
+            color: #ccc;
+        }
+        
+        /* Experience Section */
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background: var(--gradient);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 3px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background-color: var(--card-bg);
+            border: 4px solid var(--primary-color);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .left {
+            left: 0;
+        }
+        
+        .right {
+            left: 50%;
+        }
+        
+        .left::after {
+            right: -13px;
+        }
+        
+        .right::after {
+            left: -13px;
+        }
+        
+        .timeline-content {
+            padding: 25px 30px;
+            background-color: var(--card-bg);
+            position: relative;
+            border-radius: 15px;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+        
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .timeline-content h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+            font-size: 20px;
+        }
+        
+        .timeline-content p {
+            margin: 10px 0 0;
+            color: #ccc;
+        }
+        
+        /* Projects Section */
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .project-item {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .project-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .project-image {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .project-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 1;
+        }
+        
+        .project-item:hover .project-image::before {
+            opacity: 0.8;
+        }
+        
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .project-item:hover .project-image img {
+            transform: scale(1.1);
+        }
+        
+        .project-info {
+            padding: 25px;
+        }
+        
+        .project-info h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: white;
+        }
+        
+        .project-info p {
+            margin-bottom: 20px;
+            color: #ccc;
+            line-height: 1.6;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+        
+        .project-tags span {
+            background: rgba(108, 99, 255, 0.2);
+            color: var(--primary-color);
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 60px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+        }
+        
+        .contact-item:hover {
+            transform: translateX(10px);
+        }
+        
+        .contact-item i {
+            font-size: 28px;
+            color: var(--primary-color);
+            margin-right: 20px;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(108, 99, 255, 0.2);
+            border-radius: 50%;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px 20px;
+            margin-bottom: 25px;
+            border: 1px solid #333;
+            border-radius: 10px;
+            outline: none;
+            transition: var(--transition);
+            font-size: 16px;
+            background: var(--card-bg);
+            color: var(--text-color);
+        }
+        
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.2);
+        }
+        
+        .contact-form textarea {
+            min-height: 180px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background: #0a0a0a;
+            color: white;
+            padding: 80px 0 30px;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+        
+        .footer-col p {
+            margin-bottom: 20px;
+            opacity: 0.8;
+            line-height: 1.8;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--gradient);
+            transform: translateY(-5px);
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 15px;
+        }
+        
+        .footer-col ul li a {
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+        
+        .footer-col ul li a:hover {
+            opacity: 1;
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.05); opacity: 0.9; }
+            100% { transform: scale(1); opacity: 0.7; }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        @keyframes veilMove1 {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(20px, 20px) rotate(5deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+        
+        @keyframes veilMove2 {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-20px, 20px) rotate(-5deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+        
+      
+        
+        .pulse {
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        
+        /* Classes d'animation pour le défilement */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .hero-buttons{
+            margin-left: 20px;
+        }
+        .scroll-animate.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .scroll-animate-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .scroll-animate-left.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .scroll-animate-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .scroll-animate-right.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .scroll-animate-scale {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .scroll-animate-scale.animate {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        /* Éléments décoratifs avec voiles de couleur */
+        .veil-element {
+            position: absolute;
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(40px);
+            opacity: 0.5;
+        }
+        
+        .veil-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--veil-color-1);
+            top: 10%;
+            left: 5%;
+            animation: veilMove1 15s ease-in-out infinite;
+        }
+        
+        .veil-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--veil-color-2);
+            bottom: 10%;
+            right: 5%;
+            animation: veilMove2 20s ease-in-out infinite;
+        }
+        
+        .veil-3 {
+            width: 250px;
+            height: 250px;
+            background: var(--veil-color-3);
+            top: 40%;
+            right: 20%;
+            animation: veilMove1 18s ease-in-out infinite reverse;
+        }
+        
+        .veil-4 {
+            width: 350px;
+            height: 350px;
+            background: var(--veil-color-4);
+            bottom: 20%;
+            left: 10%;
+            animation: veilMove2 22s ease-in-out infinite alternate;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 991px) {
+            .hero-content,
+            .about-content,
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            .hero-text,
+            .about-text,
+            .about-image {
+                padding-right: 0;
+                margin-bottom: 40px;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item::after {
+                left: 15px;
+            }
+            
+            .right {
+                left: 0%;
+            }
+            
+            .hero-text h1 {
+                font-size: 42px;
+            }
+            
+            .section-title h2 {
+                font-size: 36px;
+            }
+            
+            .veil-element {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                background: var(--card-bg);
+                width: 280px;
+                height: 100vh;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: var(--transition);
+                box-shadow: -5px 0 25px rgba(0, 0, 0, 0.3);
+                z-index: 1000;
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .nav-menu li {
+                margin: 20px 0;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .hero-text h1 {
+                font-size: 36px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .section {
+                padding: 80px 0;
+            }
+            
+            .projects-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+    <script type="text/babel">
+        // Composants React
+        const { useState, useEffect, useRef } = React;
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+        // Composant Header
+        function Header() {
+            const [menuOpen, setMenuOpen] = useState(false);
+            const [scrolled, setScrolled] = useState(false);
+            
+            const toggleMenu = () => {
+                setMenuOpen(!menuOpen);
+            };
+            
+            useEffect(() => {
+                const handleScroll = () => {
+                    if (window.scrollY > 50) {
+                        setScrolled(true);
+                    } else {
+                        setScrolled(false);
+                    }
+                };
+                
+                window.addEventListener('scroll', handleScroll);
+                
+                return () => {
+                    window.removeEventListener('scroll', handleScroll);
+                };
+            }, []);
+            
+            return (
+                <header className={scrolled ? 'scrolled' : ''}>
+                    <div className="container nav-container">
+                        <a href="#" className="logo">Soukaina.E</a>
+                        <ul className={`nav-menu ${menuOpen ? 'active' : ''}`}>
+                            <li><a href="#accueil" onClick={() => setMenuOpen(false)}>Accueil</a></li>
+                            <li><a href="#apropos" onClick={() => setMenuOpen(false)}>À propos</a></li>
+                            <li><a href="#competences" onClick={() => setMenuOpen(false)}>Compétences</a></li>
+                            <li><a href="#experience" onClick={() => setMenuOpen(false)}>Expérience</a></li>
+                            <li><a href="#projets" onClick={() => setMenuOpen(false)}>Projets</a></li>
+                            <li><a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a></li>
+                        </ul>
+                        <div className="hamburger" onClick={toggleMenu}>
+                            <i className={`fas ${menuOpen ? 'fa-times' : 'fa-bars'}`}></i>
+                        </div>
+                    </div>
+                </header>
+            );
+        }
+
+        // Composant Hero
+        function Hero() {
+            return (
+                <section id="accueil" className="hero">
+                    <div className="veil-element veil-1"></div>
+                    <div className="veil-element veil-2"></div>
+                    <div className="container hero-content">
+                        <div className="hero-text">
+                            <h1>Bonjour, je suis <span>SOUKAINA ESSABIRI</span></h1>
+                            <p>Développeuse Full Stack passionnée par la création de solutions web modernes et innovantes. Je maîtrise React.js, Laravel, HTML, CSS, JavaScript et MySQL. Bienvenue sur mon portfolio où vous pourrez découvrir mon parcours et mes réalisations.</p>
+                            <div className="hero-buttons">
+                                <a href="#projets" className="btn">Voir mes projets</a>
+                                <a href="#contact" className="btn btn-outline">Me contacter</a>
+                            </div>
+                        </div>
+                        <div className="hero-image">
+                            <img src="WhatsApp Image 2025-05-22 à 23.48.59_e7ad31b7.jpg" alt="Soukaina ESSABIRI" className="floating" />
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // Composant About
+        function About() {
+            const aboutRef = useRef(null);
+            const [animated, setAnimated] = useState(false);
+            
+            useEffect(() => {
+                const observer = new IntersectionObserver(
+                    ([entry]) => {
+                        if (entry.isIntersecting && !animated) {
+                            setAnimated(true);
+                        }
+                    },
+                    { threshold: 0.3 }
+                );
+                
+                if (aboutRef.current) {
+                    observer.observe(aboutRef.current);
+                }
+                
+                return () => {
+                    if (aboutRef.current) {
+                        observer.unobserve(aboutRef.current);
+                    }
+                };
+            }, [animated]);
+            
+            return (
+                <section id="apropos" className="section" ref={aboutRef}>
+                    <div className="veil-element veil-3"></div>
+                    <div className="veil-element veil-4"></div>
+                    <div className="container">
+                        <div className="section-title scroll-animate">
+                            <h2>À propos de moi</h2>
+                        </div>
+                        <div className="about-content">
+                            <div className={`about-image ${animated ? 'scroll-animate-left animate' : 'scroll-animate-left'}`}>
+                                <img src="it-expert-pointing-pc-monitor-using-machine-learning-optimize-server-farm.jpg" alt="Soukaina ESSABIRI" />
+                            </div>
+                            <div className={`about-text ${animated ? 'scroll-animate-right animate' : 'scroll-animate-right'}`}>
+                                <h3>Développeuse Full Stack Passionnée</h3>
+                                <p>Je suis une développeuse Full Stack junior, passionnée par la création de solutions web modernes. Sérieuse, autonome et motivée, je souhaite intégrer une équipe dynamique pour contribuer à des projets concrets et innovants.</p>
+                                <p>J'aime relever des défis techniques et créer des solutions qui améliorent l'expérience utilisateur. Mon objectif est de continuer à apprendre et à évoluer dans le domaine du développement web et mobile.</p>
+                                <ul className="info-list">
+                                    <li><strong>Nom :</strong> <span>SOUKAINA ESSABIRI</span></li>
+                                    <li><strong>Email :</strong> <span>soukainaessabiri01@gmail.com</span></li>
+                                    <li><strong>Téléphone :</strong> <span>   0649695500</span></li>
+                                    <li><strong>Localisation :</strong> <span>Salé, Maroc</span></li>
+                                </ul>
+                                <a href="SOUKAINA ESSABIRI (3).pdf" className="btn">Télécharger mon CV</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // Composant Skills
+        function Skills() {
+            
+            const skillsRef = useRef(null);
+            const [animated, setAnimated] = useState(false);
+            
+            useEffect(() => {
+                const observer = new IntersectionObserver(
+                    ([entry]) => {
+                        if (entry.isIntersecting && !animated) {
+                            setAnimated(true);
+                        }
+                    },
+                    { threshold: 0.3 }
+                );
+                
+                if (skillsRef.current) {
+                    observer.observe(skillsRef.current);
+                }
+                
+                return () => {
+                    if (skillsRef.current) {
+                        observer.unobserve(skillsRef.current);
+                    }
+                };
+            }, [animated]);
+            
+            return (
+                <section id="competences" className="section" style={{background: '#0f0f0f'}} ref={skillsRef}>
+                    <div className="veil-element veil-1" style={{left: '70%', top: '20%'}}></div>
+                    <div className="veil-element veil-2" style={{left: '10%', top: '60%'}}></div>
+                    <div className="container">
+                        <div className={`section-title ${animated ? 'scroll-animate animate' : 'scroll-animate'}`}>
+                            <h2>Mes compétences</h2>
+                        </div>
+                        <div className="skills-container">
+                            <div className={`skill-item ${animated ? 'scroll-animate-scale animate' : 'scroll-animate-scale'}`}>
+                                <i className="fas fa-code"></i>
+                                <h3>Développement Front-End</h3>
+                                <p>Langages : HTML5, CSS3, JavaScript. Frameworks : Vue.js, React.js. Outils UI : Bootstrap, Tailwind CSS.</p>
+                            </div>
+                            <div className={`skill-item ${animated ? 'scroll-animate-scale animate' : 'scroll-animate-scale'}`}>
+                                <i className="fas fa-server"></i>
+                                <h3>Développement Back-End</h3>
+                                <p>Langages : PHP (Laravel), Python, Node.js. Compétences : Gestion des APIs sécurisées.</p>
+                            </div>
+                            <div className={`skill-item ${animated ? 'scroll-animate-scale animate' : 'scroll-animate-scale'}`}>
+                                <i className="fas fa-database"></i>
+                                <h3>Bases de données</h3>
+                                <p>Systèmes SQL : MySQL. Systèmes NoSQL : MongoDB. Requêtes et optimisation de bases de données.</p>
+                            </div>
+                            <div className={`skill-item ${animated ? 'scroll-animate-scale animate' : 'scroll-animate-scale'}`}>
+                                <i className="fas fa-mobile-alt"></i>
+                                <h3>Développement Mobile</h3>
+                                <p>Développement d'applications avec React Native. Création d'interfaces utilisateur réactives et performantes.</p>
+                            </div>
+                            <div className={`skill-item ${animated ? 'scroll-animate-scale animate' : 'scroll-animate-scale'}`}>
+                                <i className="fas fa-tasks"></i>
+                                <h3>Gestion de Projets</h3>
+                                <p>Méthodologies : Méthodes Agiles (Scrum, Kanban). Outils : Jira. Gestion efficace des projets et respect des délais.</p>
+                            </div>
+                            <div className={`skill-item ${animated ? 'scroll-animate-scale animate' : 'scroll-animate-scale'}`}>
+                                <i className="fas fa-tools"></i>
+                                <h3>Outils & DevOps</h3>
+                                <p>Versioning : Git (GitHub, GitLab, Bitbucket). Déploiement et gestion de projets. Maîtrise de Word, Excel, PowerPoint.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // Composant Experience
+        function Experience() {
+            const experienceRef = useRef(null);
+            const [animated, setAnimated] = useState(false);
+            
+            useEffect(() => {
+                const observer = new IntersectionObserver(
+                    ([entry]) => {
+                        if (entry.isIntersecting && !animated) {
+                            setAnimated(true);
+                        }
+                    },
+                    { threshold: 0.3 }
+                );
+                
+                if (experienceRef.current) {
+                    observer.observe(experienceRef.current);
+                }
+                
+                return () => {
+                    if (experienceRef.current) {
+                        observer.unobserve(experienceRef.current);
+                    }
+                };
+            }, [animated]);
+            
+            return (
+                <section id="experience" className="section" ref={experienceRef}>
+                    <div className="veil-element veil-3" style={{width: '200px', height: '200px', top: '30%', left: '80%'}}></div>
+                    <div className="veil-element veil-4" style={{width: '300px', height: '300px', top: '60%', left: '5%'}}></div>
+                    <div className="container">
+                        <div className={`section-title ${animated ? 'scroll-animate animate' : 'scroll-animate'}`}>
+                            <h2>Mon parcours</h2>
+                        </div>
+                        <div className="timeline">
+                            <div className={`timeline-item left ${animated ? 'scroll-animate-left animate' : 'scroll-animate-left'}`}>
+                                <div className="timeline-content">
+                                    <h3>Stagiaire Développeuse Web</h3>
+                                    <p><strong>Centre CAM | Fév. – Mars 2025</strong></p>
+                                    <p>Développement d'un site éducatif avec React.js pour le front-end et Laravel pour le back-end : présentation des cours, niveaux scolaires et espace contact.</p>
+                                </div>
+                            </div>
+                            <div className={`timeline-item right ${animated ? 'scroll-animate-right animate' : 'scroll-animate-right'}`}>
+                                <div className="timeline-content">
+                                    <h3>Stagiaire Développeuse WordPress</h3>
+                                    <p><strong>Metasupport | Jan 2025</strong></p>
+                                    <p>Création d'un site e-commerce WordPress pour la vente de produits informatiques : catalogue, paiement, personnalisation.</p>
+                                </div>
+                            </div>
+                            <div className={`timeline-item left ${animated ? 'scroll-animate-left animate' : 'scroll-animate-left'}`}>
+                                <div className="timeline-content">
+                                    <h3>Diplôme en développement Full Stack</h3>
+                                    <p><strong>Institut Spécialisé de Technologie Appliquée Salé | 2024 - 2025</strong></p>
+                                    <p>Formation complète en développement web et mobile couvrant les technologies front-end et back-end.</p>
+                                </div>
+                            </div>
+                            <div className={`timeline-item right ${animated ? 'scroll-animate-right animate' : 'scroll-animate-right'}`}>
+                                <div className="timeline-content">
+                                    <h3>Baccalauréat Scientifique</h3>
+                                    <p><strong>Lycée Wallada Salé | 2022 - 2023</strong></p>
+                                    <p>Baccalauréat Scientifique en Sciences Physiques.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // Composant Projects
+        function Projects() {
+            const [projects] = useState([
+                {
+                    id: 1,
+                    title: "Site Éducatif",
+                    description: "Développement d'un site éducatif avec présentation des cours, niveaux scolaires et espace contact.",
+                    tags: ["React.js", "Laravel", "MySQL"],
+                    image: "multiethnic-team-young-partners-having-meeting-cafeteria-discussing-plans-sharing-ideas-analyzing-financial-data-project-using-laptop.jpg"
+                },
+                {
+                    id: 4,
+                    title: "Plateforme Éducative",
+                    description: "Site d'échange de cours entre élèves et enseignants (upload, téléchargement, messagerie).",
+                    tags: ["Vue.js", "Laravel", "MySQL"],
+                    image: "learn-learning-education-studying-concept.jpg"
+                },
+            ]);
+            
+            const projectsRef = useRef(null);
+            const [animated, setAnimated] = useState(false);
+            
+            useEffect(() => {
+                const observer = new IntersectionObserver(
+                    ([entry]) => {
+                        if (entry.isIntersecting && !animated) {
+                            setAnimated(true);
+                        }
+                    },
+                    { threshold: 0.3 }
+                );
+                
+                if (projectsRef.current) {
+                    observer.observe(projectsRef.current);
+                }
+                
+                return () => {
+                    if (projectsRef.current) {
+                        observer.unobserve(projectsRef.current);
+                    }
+                };
+            }, [animated]);
+            
+            return (
+                <section id="projets" className="section" ref={projectsRef}>
+                    <div className="veil-element veil-1" style={{width: '250px', height: '250px', top: '20%', left: '10%'}}></div>
+                    <div className="veil-element veil-2" style={{width: '350px', height: '350px', top: '60%', left: '75%'}}></div>
+                    <div className="container">
+                        <div className={`section-title ${animated ? 'scroll-animate animate' : 'scroll-animate'}`}>
+                            <h2>Mes projets</h2>
+                        </div>
+                        <div className="projects-container">
+                            {projects.map((project, index) => (
+                                <div key={project.id} className={`project-item ${animated ? 'scroll-animate-scale animate' : 'scroll-animate-scale'}`} style={{transitionDelay: `${index * 0.1}s`}}>
+                                    <div className="project-image">
+                                        <img src={project.image} alt={project.title} />
+                                    </div>
+                                    <div className="project-info">
+                                        <h3>{project.title}</h3>
+                                        <p>{project.description}</p>
+                                        <div className="project-tags">
+                                            {project.tags.map((tag, tagIndex) => (
+                                                <span key={tagIndex}>{tag}</span>
+                                            ))}
+                                        </div>
+                                        <a href="https://centreelmoumen-ny3j.vercel.app" className="btn">Voir le projet</a>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // Composant Contact
+        function Contact() {
+            const [formData, setFormData] = useState({
+                name: '',
+                email: '',
+                message: ''
+            });
+            
+            const contactRef = useRef(null);
+            const [animated, setAnimated] = useState(false);
+            
+            useEffect(() => {
+                const observer = new IntersectionObserver(
+                    ([entry]) => {
+                        if (entry.isIntersecting && !animated) {
+                            setAnimated(true);
+                        }
+                    },
+                    { threshold: 0.3 }
+                );
+                
+                if (contactRef.current) {
+                    observer.observe(contactRef.current);
+                }
+                
+                return () => {
+                    if (contactRef.current) {
+                        observer.unobserve(contactRef.current);
+                    }
+                };
+            }, [animated]);
+            
+            const handleChange = (e) => {
+                setFormData({
+                    ...formData,
+                    [e.target.name]: e.target.value
+                });
+            };
+            
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                alert('Message envoyé! Merci de m\'avoir contactée.');
+                setFormData({
+                    name: '',
+                    email: '',
+                    message: ''
+                });
+            };
+            
+            return (
+                <section id="contact" className="section" ref={contactRef}>
+                    <div className="veil-element veil-3" style={{width: '300px', height: '300px', top: '20%', left: '70%'}}></div>
+                    <div className="veil-element veil-4" style={{width: '200px', height: '200px', top: '60%', left: '15%'}}></div>
+                    <div className="container">
+                        <div className={`section-title ${animated ? 'scroll-animate animate' : 'scroll-animate'}`}>
+                            <h2>Contactez-moi</h2>
+                        </div>
+                        <div className="contact-container">
+                            <div className="contact-info">
+                                <div className={`contact-item ${animated ? 'scroll-animate-left animate' : 'scroll-animate-left'}`}>
+                                    <i className="fas fa-map-marker-alt"></i>
+                                    <div>
+                                        <h3>Localisation</h3>
+                                        <p>Salé, Maroc</p>
+                                    </div>
+                                </div>
+                                <div className={`contact-item ${animated ? 'scroll-animate-left animate' : 'scroll-animate-left'}`} style={{transitionDelay: '0.1s'}}>
+                                    <i className="fas fa-envelope"></i>
+                                    <div>
+                                        <h3>Email</h3>
+                                        <p>soukainaessabiri01@gmail.com</p>
+                                    </div>
+                                </div>
+                                <div className={`contact-item ${animated ? 'scroll-animate-left animate' : 'scroll-animate-left'}`} style={{transitionDelay: '0.2s'}}>
+                                    <i className="fas fa-phone"></i>
+                                    <div>
+                                        <h3>Téléphone</h3>
+                                        <p>0649695500</p>
+                                    </div>
+                                </div>
+                                <div className={`contact-item ${animated ? 'scroll-animate-left animate' : 'scroll-animate-left'}`} style={{transitionDelay: '0.3s'}}>
+                                    <i className="fab fa-linkedin"></i>
+                                    <div>
+                                        <h3>LinkedIn</h3>
+                                        <p>soukainaessabiri</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <form className={`contact-form ${animated ? 'scroll-animate-right animate' : 'scroll-animate-right'}`} onSubmit={handleSubmit}>
+                                <input 
+                                    type="text" 
+                                    name="name" 
+                                    placeholder="Votre nom" 
+                                    value={formData.name}
+                                    onChange={handleChange}
+                                    required 
+                                />
+                                <input 
+                                    type="email" 
+                                    name="email" 
+                                    placeholder="Votre email" 
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    required 
+                                />
+                                <textarea 
+                                    name="message" 
+                                    placeholder="Votre message" 
+                                    value={formData.message}
+                                    onChange={handleChange}
+                                    required
+                                ></textarea>
+                                <button type="submit" className="btn">Envoyer le message</button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+            );
+        }
+
+        // Composant Footer
+        function Footer() {
+            return (
+                <footer>
+                    <div className="container">
+                        <div className="footer-container">
+                            <div className="footer-col">
+                                <h3>Soukaina ESSABIRI</h3>
+                                <p>Développeuse Full Stack passionnée, créant des solutions web modernes et innovantes.</p>
+                                <div className="social-links">
+                                    <a href="#"><i className="fab fa-github"></i></a>
+                                    <a href="#"><i className="fab fa-linkedin"></i></a>
+                                    <a href="#"><i className="fab fa-twitter"></i></a>
+                                </div>
+                            </div>
+                            <div className="footer-col">
+                                <h3>Liens rapides</h3>
+                                <ul>
+                                    <li><a href="#accueil">Accueil</a></li>
+                                    <li><a href="#apropos">À propos</a></li>
+                                    <li><a href="#competences">Compétences</a></li>
+                                    <li><a href="#experience">Expérience</a></li>
+                                    <li><a href="#projets">Projets</a></li>
+                                    <li><a href="#contact">Contact</a></li>
+                                </ul>
+                            </div>
+                            <div className="footer-col">
+                                <h3>Contactez-moi</h3>
+                                <p><i className="fas fa-map-marker-alt"></i> Salé, Maroc</p>
+                                <p><i className="fas fa-phone"></i> 0649695500</p>
+                                <p><i className="fas fa-envelope"></i> soukainaessabiri01@gmail.com</p>
+                            </div>
+                        </div>
+                        <div className="copyright">
+                            <p>&copy; {new Date().getFullYear()} SOUKAINA ESSABIRI. Tous droits réservés.</p>
+                        </div>
+                    </div>
+                </footer>
+            );
+        }
+
+        // Composant principal App
+        function App() {
+            const [scrollPosition, setScrollPosition] = useState(0);
+            
+            useEffect(() => {
+                const handleScroll = () => {
+                    setScrollPosition(window.scrollY);
+                };
+                
+                window.addEventListener('scroll', handleScroll);
+                
+                return () => {
+                    window.removeEventListener('scroll', handleScroll);
+                };
+            }, []);
+            
+            return (
+                <div className="App">
+                    <Header />
+                    <Hero />
+                    <About />
+                    <Skills />
+                    <Experience />
+                    <Projects />
+                    <Contact />
+                    <Footer />
+                </div>
+            );
+        }
+
+        // Rendu de l'application
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
 </html>
