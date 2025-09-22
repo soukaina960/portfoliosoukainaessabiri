@@ -7,6 +7,7 @@
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
@@ -377,12 +378,16 @@
         
         /* Skills Section */
         .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 30px;
         }
         
         .skill-item {
+            flex: 0 0 calc(33.333% - 30px);
+            min-width: 300px;
+            max-width: 400px;
             background: var(--card-bg);
             padding: 40px 30px;
             border-radius: 20px;
@@ -514,12 +519,15 @@
         
         /* Projects Section */
         .projects-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 50px;
         }
         
         .project-item {
+            width: 500px;
             background: var(--card-bg);
             border-radius: 20px;
             overflow: hidden;
@@ -597,6 +605,8 @@
             border-radius: 20px;
             font-size: 12px;
             font-weight: 500;
+            margin-left: 30px;
+
         }
         
         .project-buttons {
@@ -785,94 +795,6 @@
             animation: spin 1s ease-in-out infinite;
             margin-right: 10px;
         }
-        /* Conteneur des projets */
-.projects-container {
-  display: flex;
-  justify-content: center;   /* centre horizontalement */
-  gap: 40px;                 /* espace entre les cartes */
-  flex-wrap: wrap;           /* permet le retour à la ligne si écran petit */
-  margin-top: 50px;
-}
-
-/* Chaque carte projet */
-.project-item {
-  width: 500px;              /* 👉 largeur grande */
- 
-  border-radius: 16px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* Effet hover */
-.project-item:hover {
-  transform: translateY(-12px);
-  box-shadow: 0 10px 28px rgba(0,0,0,0.25);
-}
-
-/* Image du projet */
-.project-image img {
-  width: 100%;
-  height: 280px;       /* fixe la hauteur */
-  object-fit: cover;   /* évite la déformation */
-  border-bottom: 1px solid #eee;
-}
-
-/* Infos */
-.project-info {
-  padding: 20px;
-}
-
-.project-info h3 {
-  font-size: 1.5rem;
-  margin-bottom: 12px;
-
-}
-
-.project-info p {
-  font-size: 1rem;
-
-  margin-bottom: 16px;
-}
-
-/* Tags */
-.project-tags {
-  margin-bottom: 20px;
-  margin-left: 90px;
-}
-
-.project-tags span {
-  display: inline-block;
- 
-
-  font-size: 0.9rem;
-  padding: 5px 12px;
-  border-radius: 20px;
-  margin: 5px 8px 0 3px;
-}
-
-/* Boutons */
-.project-buttons {
-  display: flex;
-  gap: 12px;
-
-
-}
-
-.project-buttons .btn {
-  padding: 10px 20px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  margin-left: 40px;
-
-}
-
-
-
-
-
         
         @keyframes spin {
             to { transform: rotate(360deg); }
@@ -926,10 +848,6 @@
             0% { transform: translate(0, 0) rotate(0deg); }
             50% { transform: translate(-20px, 20px) rotate(-5deg); }
             100% { transform: translate(0, 0) rotate(0deg); }
-        }
-        
-        .floating {
-            animation: float 6s ease-in-out infinite;
         }
         
         .pulse {
@@ -1082,6 +1000,10 @@
             .project-buttons {
                 flex-direction: column;
             }
+            
+            .skill-item {
+                flex: 0 0 calc(50% - 30px);
+            }
         }
         
         @media (max-width: 768px) {
@@ -1138,6 +1060,14 @@
                 max-height: 400px;
                 height: 400px;
             }
+            
+            .project-item {
+                width: 100%;
+            }
+            
+            .skill-item {
+                flex: 0 0 100%;
+            }
         }
         
         @media (max-width: 480px) {
@@ -1163,12 +1093,31 @@
                 margin-bottom: 5px;
             }
         }
+        .contact-form.success {
+    transition: all 0.3s ease;
+}
+
+.success-message {
+    color: #4CAF50;
+    font-weight: bold;
+    margin-bottom: 10px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
     </style>
 </head>
 <body>
     <div id="root"></div>
 
     <script type="text/babel">
+        // Initialisation d'EmailJS
+        emailjs.init("wrweGVSs0B0XEB4Kn");
+
         // Composants React
         const { useState, useEffect, useRef } = React;
 
@@ -1301,7 +1250,7 @@
                                     </div>
                                 )}
                                 <img 
-                                    src="it-expert-pointing-pc-monitor-using-machine-learning-optimize-server-farm.jpg" 
+                                    src="computer-monitors-showing-source-code-empty-it-company-office-security-system-compiling-data-algorithms-background-artificial-intelligence-servers-cloud-computing-programming-room.jpg" 
                                     alt="Soukaina ESSABIRI" 
                                     style={{display: imageLoaded ? 'block' : 'none'}}
                                     onLoad={() => setImageLoaded(true)}
@@ -1320,7 +1269,7 @@
                                     <li><strong>Téléphone :</strong> <span>0649695500</span></li>
                                     <li><strong>Localisation :</strong> <span>Salé, Maroc</span></li>
                                 </ul>
-                                <a href="SOUKAINA ESSABIRI (3).pdf" className="btn">Télécharger mon CV</a>
+                                <a href="SOUKAINA ESSABIRI (3).pdf"  target="_blank" className="btn">Télécharger mon CV</a>
                             </div>
                         </div>
                     </div>
@@ -1378,7 +1327,6 @@
                                 <h3>Bases de données</h3>
                                 <p>Systèmes SQL : MySQL. Systèmes NoSQL : MongoDB. Requêtes et optimisation de bases de données.</p>
                             </div>
-                         
                             <div className={`skill-item ${animated ? 'scroll-animate-scale animate' : 'scroll-animate-scale'}`}>
                                 <i className="fas fa-tasks"></i>
                                 <h3>Gestion de Projets</h3>
@@ -1480,8 +1428,8 @@
                 },
                 {
                     id: 2,
-                    title: "Plateforme Éducative",
-                    description: "Site d'échange de cours entre élèves et enseignants (upload, téléchargement, messagerie).",
+                    title: "Plateforme gestion scolaire",
+                    description: "Application complète pour gérer élèves, professeurs, absences, notes et emploi du temps.etc.",
                     tags: ["React.js", "Laravel", "MySQL"],
                     image: "learn-learning-education-studying-concept.jpg",
                     links: {
@@ -1577,16 +1525,18 @@
 
         // Composant Contact
         function Contact() {
+            const [success, setSuccess] = useState(false);
+
             const [formData, setFormData] = useState({
-                name: '',
-                email: '',
-                message: ''
+                name: "",
+                email: "",
+                message: ""
             });
             const [isSubmitting, setIsSubmitting] = useState(false);
-            
+
             const contactRef = useRef(null);
             const [animated, setAnimated] = useState(false);
-            
+
             useEffect(() => {
                 const observer = new IntersectionObserver(
                     ([entry]) => {
@@ -1596,41 +1546,45 @@
                     },
                     { threshold: 0.3 }
                 );
-                
+
                 if (contactRef.current) {
                     observer.observe(contactRef.current);
                 }
-                
+
                 return () => {
                     if (contactRef.current) {
                         observer.unobserve(contactRef.current);
                     }
                 };
             }, [animated]);
-            
+
             const handleChange = (e) => {
                 setFormData({
                     ...formData,
                     [e.target.name]: e.target.value
                 });
             };
-            
-            const handleSubmit = (e) => {
-                e.preventDefault();
-                setIsSubmitting(true);
-                
-                // Simulation d'envoi
-                setTimeout(() => {
-                    alert('Message envoyé! Merci de m\'avoir contactée.');
-                    setFormData({
-                        name: '',
-                        email: '',
-                        message: ''
-                    });
-                    setIsSubmitting(false);
-                }, 1500);
-            };
-            
+
+          const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    emailjs
+        .send("service_flj1kol", "template_ensfuqt", formData)
+        .then(() => {
+            setSuccess(true); // ← ici on active le style succès
+            setFormData({ name: "", email: "", message: "" });
+        })
+        .catch((error) => {
+            console.error("Erreur EmailJS:", error);
+            alert("❌ Une erreur est survenue, réessayez.");
+            setSuccess(false);
+        })
+        .finally(() => {
+            setIsSubmitting(false);
+        });
+};
+
             return (
                 <section id="contact" className="section" ref={contactRef}>
                     <div className="veil-element veil-3" style={{width: '300px', height: '300px', top: '20%', left: '70%'}}></div>
@@ -1670,42 +1624,50 @@
                                     </div>
                                 </div>
                             </div>
-                            <form className={`contact-form ${animated ? 'scroll-animate-right animate' : 'scroll-animate-right'}`} onSubmit={handleSubmit}>
-                                <input 
-                                    type="text" 
-                                    name="name" 
-                                    placeholder="Votre nom" 
-                                    value={formData.name}
-                                    onChange={handleChange}
-                                    required 
-                                    disabled={isSubmitting}
-                                />
-                                <input 
-                                    type="email" 
-                                    name="email" 
-                                    placeholder="Votre email" 
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                    required 
-                                    disabled={isSubmitting}
-                                />
-                                <textarea 
-                                    name="message" 
-                                    placeholder="Votre message" 
-                                    value={formData.message}
-                                    onChange={handleChange}
-                                    required
-                                    disabled={isSubmitting}
-                                ></textarea>
-                                <button type="submit" className="btn" disabled={isSubmitting}>
-                                    {isSubmitting ? (
-                                        <>
-                                            <span className="loading-spinner"></span>
-                                            Envoi en cours...
-                                        </>
-                                    ) : 'Envoyer le message'}
-                                </button>
-                            </form>
+                           <form
+    className={`contact-form ${animated ? "scroll-animate-right animate" : "scroll-animate-right"} ${success ? 'success' : ''}`}
+    onSubmit={handleSubmit}
+>
+    {success && <div className="success-message">✅ Votre message a été envoyé avec succès !</div>}
+
+    <input
+        type="text"
+        name="name"
+        placeholder="Votre nom"
+        value={formData.name}
+        onChange={handleChange}
+        required
+        disabled={isSubmitting}
+    />
+    <input
+        type="email"
+        name="email"
+        placeholder="Votre email"
+        value={formData.email}
+        onChange={handleChange}
+        required
+        disabled={isSubmitting}
+    />
+    <textarea
+        name="message"
+        placeholder="Votre message"
+        value={formData.message}
+        onChange={handleChange}
+        required
+        disabled={isSubmitting}
+    ></textarea>
+    <button type="submit" className="btn" disabled={isSubmitting}>
+        {isSubmitting ? (
+            <>
+                <span className="loading-spinner"></span>
+                Envoi en cours...
+            </>
+        ) : (
+            "Envoyer le message"
+        )}
+    </button>
+</form>
+
                         </div>
                     </div>
                 </section>
@@ -1723,8 +1685,7 @@
                                 <p>Développeuse Full Stack passionnée, créant des solutions web modernes et innovantes.</p>
                                 <div className="social-links">
                                     <a href="https://github.com/soukaina960" target="_blank" rel="noopener noreferrer"><i className="fab fa-github"></i></a>
-                                    <a href="#"><i className="fab fa-linkedin"></i></a>
-                                    <a href="#"><i className="fab fa-twitter"></i></a>
+                                   
                                 </div>
                             </div>
                             <div className="footer-col">
