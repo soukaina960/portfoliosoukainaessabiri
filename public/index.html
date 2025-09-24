@@ -1676,41 +1676,50 @@
 
         // Composant Footer
         function Footer() {
-            return (
-                <footer>
-                    <div className="container">
-                        <div className="footer-container">
-                            <div className="footer-col">
-                                <h3>Soukaina ESSABIRI</h3>
-                                <p>Développeuse Full Stack passionnée, créant des solutions web modernes et innovantes.</p>
-                                <div className="social-links">
-                                    <a href="https://github.com/soukaina960" target="_blank" rel="noopener noreferrer"><i className="fab fa-github"></i></a>
-                                   
-                                </div>
-                            </div>
-                            <div className="footer-col">
-                                <h3>Liens rapides</h3>
-                                <ul>
-                                    <li><a href="#accueil">Accueil</a></li>
-                                    <li><a href="#apropos">À propos</a></li>
-                                    <li><a href="#competences">Compétences</a></li>
-                                    <li><a href="#experience">Expérience</a></li>
-                                    <li><a href="#projets">Projets</a></li>
-                                    <li><a href="#contact">Contact</a></li>
-                                </ul>
-                            </div>
-                            <div className="footer-col">
-                                <h3>Contactez-moi</h3>
-                                <p><i className="fas fa-map-marker-alt"></i> Salé, Maroc</p>
-                                <p><i className="fas fa-phone"></i> 0649695500</p>
-                                <p><i className="fas fa-envelope"></i> soukainaessabiri01@gmail.com</p>
-                            </div>
-                        </div>
-                        <div className="copyright">
-                            <p>&copy; {new Date().getFullYear()} SOUKAINA ESSABIRI. Tous droits réservés.</p>
+    return (
+        <footer>
+            <div className="container">
+                <div className="footer-container">
+                    <div className="footer-col">
+                        <h3>Soukaina ESSABIRI</h3>
+                        <p>Développeuse Full Stack passionnée, créant des solutions web modernes et innovantes.</p>
+                        <div className="social-links">
+                            <a href="https://github.com/soukaina960" target="_blank" rel="noopener noreferrer">
+                                <i className="fab fa-github"></i>
+                            </a>
+                            <a 
+                                href="https://wa.me/212649695500" 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                            >
+                                <i className="fab fa-whatsapp"></i>
+                            </a>
                         </div>
                     </div>
-                </footer>
+                    <div className="footer-col">
+                        <h3>Liens rapides</h3>
+                        <ul>
+                            <li><a href="#accueil">Accueil</a></li>
+                            <li><a href="#apropos">À propos</a></li>
+                            <li><a href="#competences">Compétences</a></li>
+                            <li><a href="#experience">Expérience</a></li>
+                            <li><a href="#projets">Projets</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div className="footer-col">
+                        <h3>Contactez-moi</h3>
+                        <p><i className="fas fa-map-marker-alt"></i> Salé, Maroc</p>
+                        <p><i className="fas fa-phone"></i> 0649695500</p>
+                        <p><i className="fas fa-envelope"></i> soukainaessabiri01@gmail.com</p>
+                    </div>
+                </div>
+                <div className="copyright">
+                    <p>&copy; {new Date().getFullYear()} SOUKAINA ESSABIRI.</p>
+                </div>
+            </div>
+        </footer>
+    
             );
         }
 
